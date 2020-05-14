@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 public class UnitTest {
-    private Logger logger = LoggerFactory.getLogger("testLog");
+    private final Logger logger = LoggerFactory.getLogger("testLog");
 
     @Test
     public void testSerial() {
@@ -34,14 +34,6 @@ public class UnitTest {
         class ComputeTask implements Callable<String> {
             private String taskName;
             private int sleepMillis;
-
-            public String getTaskName() {
-                return taskName;
-            }
-
-            public void setTaskName(String taskName) {
-                this.taskName = taskName;
-            }
 
             public ComputeTask(String taskName) {
                 this.taskName = taskName;
@@ -83,7 +75,7 @@ public class UnitTest {
         es.shutdown();
     }
 
-    @org.junit.Test
+    @Test
     public void testConfig() {
         StopwatchLog stopwatchLog = new StopwatchLog("test-conf", "TestLog").start();
         try {

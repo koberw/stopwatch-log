@@ -16,7 +16,7 @@ public class StopwatchLog {
     private final String id;
     private final Logger logger;
     private String traceId;
-    private Map<String, TaskInfo> taskMap = new LinkedHashMap<>();
+    private final Map<String, TaskInfo> taskMap = new LinkedHashMap<>();
     private String lastTaskName;
     private long startTimeMillis;
     private long totalTimeMillis;
@@ -89,6 +89,16 @@ public class StopwatchLog {
      */
     public StopwatchLog start() {
         return start(null);
+    }
+
+    /**
+     * 开始一个新的任务计时（线程安全）
+     * 用于多线程创建任务时的互斥同步
+     */
+    public StopwatchLog concurrentStart(String taskName) {
+        synchronized (this) {
+            return start(taskName);
+        }
     }
 
     /**

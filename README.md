@@ -1,7 +1,7 @@
 # StopwatchLog
 
 ## 简介
-一个可定制的计时器小工具
+一个可灵活控制日志输出的的计时器工具
 
 ## 功能
  * 支持串行任务和并行任务
@@ -46,7 +46,8 @@
    //task2 结束时
    stopwatchLog.stop("task2");   
    ```
-   **注**：此方法目前只适合异步阻塞调用时，在主线程中打点计时。
+   **注**：此方法目前只适合异步阻塞调用时，在主线程中打点计时。  
+   当StopwatchLog对象传入多个线程时，请使用concurrentStart创建线程安全的task
    
  ### 日志输出
  日志输出为spring风格：
@@ -72,9 +73,4 @@
  可参考: test/java/tool/common/stopwatchlog/Test.java
  
 ## TIPS
-* 本工具非线程安全，同一个StopwatchLog对象不建议在多个线程中使用
 * 代码中的日志组件为slf4j + slf4j-simple, 自测使用，实际项目中可自行修改为需要的实现
-
-## TODO 
-* 多线程-线程安全
-* ConfigFile实时生效
